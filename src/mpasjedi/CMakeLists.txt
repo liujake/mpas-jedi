@@ -86,7 +86,6 @@ ecbuild_add_library( TARGET ${PROJECT_NAME}
                      INSTALL_HEADERS LISTED
                      HEADER_DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}
                      )
-
 #Link dependencies
 if(OpenMP_FOUND)
     target_link_libraries( ${PROJECT_NAME} PUBLIC OpenMP::OpenMP_Fortran OpenMP::OpenMP_CXX )
@@ -98,6 +97,7 @@ target_link_libraries( ${PROJECT_NAME} PUBLIC oops )
 target_link_libraries( ${PROJECT_NAME} PUBLIC saber )
 target_link_libraries( ${PROJECT_NAME} PUBLIC ioda )
 target_link_libraries( ${PROJECT_NAME} PUBLIC ufo )
+target_compile_definitions( ${PROJECT_NAME} PUBLIC USE_MPAS${MPAS_VERSION_MAJOR})
 
 #Configure include directory layout for build-tree to match install-tree
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/..>)

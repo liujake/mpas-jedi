@@ -95,7 +95,13 @@ subroutine model_setup(self, geom, f_conf)
    self % domain => geom % domain
 !   f_comm = fckit_mpi_comm()
 !   !> MPAS subdriver
+!#ifdef USE_MPAS8
+!   call mpas_init( self % corelist, self % domain, external_comm=f_comm%communicator() )
+!#endif
+!#ifdef USE_MPAS7
 !   call mpas_init( self % corelist, self % domain, mpi_comm=f_comm%communicator() )
+!#endif
+!
 !   if (associated(self % domain)) then
 !       call fckit_log%debug('inside model: model % domain associated')
 !   end if
